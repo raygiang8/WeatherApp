@@ -60,7 +60,7 @@ class WeatherApp extends Component {
   }
 
   getWeatherInfo = () => {
-    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/bc1b05cbe478a373668b696090e9ad51/${this.latitude},${this.longitude}?units=ca`;
+    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=ca`;
     axios.get(apiURL)
       .then(response => (
         this.mapWeather(response.data)
