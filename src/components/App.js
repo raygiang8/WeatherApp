@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import CurrentWeatherPanel from './CurrentWeatherPanel';
 import CurrentWeatherCard from './CurrentWeatherCard';
 import DailyWeatherCard from './DailyWeatherCard';
 import LocationSearch from './LocationSearch';
@@ -14,7 +15,8 @@ class WeatherApp extends Component {
     super(props);
     this.state = {
       currentForecast: [],
-      dailyForecast: []
+      dailyForecast: [],
+      unit: "si"
     };
 
     this.currentLocation = '';
@@ -33,45 +35,63 @@ class WeatherApp extends Component {
           this.getWeatherInfo();
         },
         function error(error_message) {
-          console.error('An error has occured while retrieving location', 
+          console.error('An error has occured while retrieving location',
             error_message);
         });
     }
     else {
-        console.log('geolocation is not enabled on this browser')
+      console.log('geolocation is not enabled on this browser')
     }
   }
 
   getLocation = (newLoc) => {
-    geocoder.search( { q: newLoc } )
-    .then((response) => {
-      this.currentLocation = "You are viewing the weather for: " + response[0].display_name;
-      this.latitude = response[0].lat;
-      this.longitude = response[0].lon;
-      this.getWeatherInfo();
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    geocoder.search({ q: newLoc })
+      .then((response) => {
+        this.currentLocation = "You are viewing the weather for: " + response[0].display_name;
+        this.latitude = response[0].lat;
+        this.longitude = response[0].lon;
+        this.getWeatherInfo();
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   componentDidMount() {
     this.getCurrentLocation();
   }
 
+  //----function to toggle between units----//
+  handleUnit = () => {
+    if (this.state.unit === "si") {
+      this.setState({
+        unit: "us"
+      },
+      ()=>this.getWeatherInfo());
+    }
+    else {
+      this.setState({
+        unit: "si"
+      },
+      ()=>this.getWeatherInfo());
+    }
+  }
+
   getWeatherInfo = () => {
-    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=ca`;
+    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=${this.state.unit}`;
     axios.get(apiURL)
       .then(response => (
         this.mapWeather(response.data)
       ));
   }
 
+
+
   mapWeather = (data) => {
     let dailyData = data.daily.data;
     let keyCounter = 0;
 
-    let dailyForecast = dailyData.map(weather => 
+    let dailyForecast = dailyData.map(weather =>
       <DailyWeatherCard key={keyCounter} index={keyCounter++} dailyForecast={dailyData} />
     );
 
@@ -88,12 +108,15 @@ class WeatherApp extends Component {
 
   render() {
     console.log("I HAVE RENDERED!!!");
-    return(
+    return (
       <div>
-        <h1>Wind Gusts</h1>
+        <h1>Weather</h1>
+        <button onClick={this.handleUnit}>Toggle Unit</button>
         <h2>{this.currentLocation}</h2>
         <LocationSearch changeLoc={this.getLocation} />
         <CurrentWeatherCard currentForecast={this.state.currentForecast} />
+        <CurrentWeatherPanel currentForecast={this.state.currentForecast} />
+
         <div>{this.results ? this.results : <div>Loading...</div>}</div>
       </div>
     );

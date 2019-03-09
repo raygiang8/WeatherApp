@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CurrentWeatherCard = (props) => {
-  if(props.currentForecast === []) {
+  if (props.currentForecast === []) {
     return (<div>Loading...</div>);
   }
 
