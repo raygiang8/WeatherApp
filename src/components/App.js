@@ -19,7 +19,6 @@ class WeatherApp extends Component {
     super(props);
     this.state = {
       currentForecast: [],
-      dailyForecast: [],
       unit: "si",
       searchResults: null,
       backgroundImage: null
@@ -102,12 +101,12 @@ class WeatherApp extends Component {
   }
 
   mapWeather = (data) => {
-    let dailyData = data.daily.data;
+    let dailyData = data.daily;
     let keyCounter = 0;
 
-    let dailyForecast = dailyData.map(weather =>
+    let dailyForecast = dailyData.data.map((weather, index) =>
       <Col xs={3}>
-        <DailyWeatherCard key={keyCounter} index={keyCounter++} dailyForecast={dailyData} />
+        <DailyWeatherCard key={index} index={index} dailyForecast={dailyData} />
       </Col>
     );
 
@@ -115,10 +114,6 @@ class WeatherApp extends Component {
 
     this.setState({
       currentForecast: data.currently
-    });
-
-    this.setState({
-      dailyForecast: dailyData
     });
 
     let pexelsURL = `https://api.pexels.com/v1/search?query=${data.currently.summary}&per_page=30&page=1`;
@@ -134,7 +129,7 @@ class WeatherApp extends Component {
   }
 
   getRandomPhoto = (photos) => {
-    let randomIndex = Math.floor(Math.random() * (29 + 1));
+    let randomIndex = Math.floor(Math.random() * (photos.length));
     this.setState({
       backgroundImage: photos[randomIndex].src.original
     });
