@@ -11,8 +11,8 @@ const DailyWeatherCard = (props) => {
   }
 
   return (
-    <div>
-      <h3>{getDate()}</h3>
+    <div className="mt-4">
+      <h6>{getDate()}</h6>
       <div>Wind Gust: {props.dailyForecast[props.index].windGust}</div>
       <div>Ozone: {props.dailyForecast[props.index].ozone}</div>
       <div>Moon Phase: {props.dailyForecast[props.index].moonPhase}</div>

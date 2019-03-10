@@ -8,6 +8,10 @@ import SearchResults from './SearchResults';
 import axios from 'axios';
 import Nominatim from 'nominatim-geocoder';
 
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+
 const geocoder = new Nominatim();
 
 class WeatherApp extends Component {
@@ -77,18 +81,18 @@ class WeatherApp extends Component {
       this.setState({
         unit: "us"
       },
-      ()=>this.getWeatherInfo());
+        () => this.getWeatherInfo());
     }
     else {
       this.setState({
         unit: "si"
       },
-      ()=>this.getWeatherInfo());
+        () => this.getWeatherInfo());
     }
   }
 
   getWeatherInfo = () => {
-    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=${this.state.unit}`;
+    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=${this.state.unit}&time=${Date.now()}`;
     axios.get(apiURL)
       .then(response => (
         this.mapWeather(response.data)
@@ -101,7 +105,9 @@ class WeatherApp extends Component {
     let keyCounter = 0;
 
     let dailyForecast = dailyData.map(weather =>
-      <DailyWeatherCard key={keyCounter} index={keyCounter++} dailyForecast={dailyData} />
+      <Col xs={3}>
+        <DailyWeatherCard key={keyCounter} index={keyCounter++} dailyForecast={dailyData} />
+      </Col>
     );
 
     this.results = dailyForecast;
@@ -122,19 +128,27 @@ class WeatherApp extends Component {
   render() {
     console.log("I HAVE RENDERED!!!");
     return (
-      <div>
-        <h1>Weather</h1>
-        <button onClick={this.handleUnit}>Toggle Unit</button>
-        <h2>{this.currentLocation}</h2>
-        <LocationSearch changeLoc={this.getLocation} />
-        <SearchResults 
-          currentSelection={this.currentSelection} 
-          searchResults={this.state.searchResults}
-          locChange={this.locChange}
-        />
-        <CurrentWeatherPanel currentForecast={this.state.currentForecast} />
+      <div className="m-5">
+        <Row>
+          <Col xs={3}>
+            <h1>Hell0 there.</h1>
+            <button onClick={this.handleUnit}>Toggle Unit</button>
+            <h2>{this.currentLocation}</h2>
+            <CurrentWeatherPanel currentForecast={this.state.currentForecast} />
+          </Col>
+          <Col xs={9}>
+            <LocationSearch changeLoc={this.getLocation} />
+            <SearchResults
+              currentSelection={this.currentSelection}
+              searchResults={this.state.searchResults}
+              locChange={this.locChange}
+            />
+            <Row>
+              {this.results ? this.results : <div>Loading...</div>}
+            </Row>
+          </Col>
+        </Row>
 
-        <div>{this.results ? this.results : <div>Loading...</div>}</div>
       </div>
     );
   }
