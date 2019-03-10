@@ -16,7 +16,7 @@ const SearchResults = (props) => {
 
   return (
     <fieldset>
-      <legend>Current Weather</legend>
+      <legend>Possible Locations</legend>
       {locationOptions}
     </fieldset>
   );
