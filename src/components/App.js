@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import CurrentWeatherPanel from './CurrentWeatherPanel';
-import CurrentWeatherCard from './CurrentWeatherCard';
 import DailyWeatherCard from './DailyWeatherCard';
 import LocationSearch from './LocationSearch';
+import SearchResults from './SearchResults';
 
 import axios from 'axios';
 import Nominatim from 'nominatim-geocoder';
@@ -16,13 +16,15 @@ class WeatherApp extends Component {
     this.state = {
       currentForecast: [],
       dailyForecast: [],
-      unit: "si"
+      unit: "si",
+      searchResults: null
     };
 
     this.currentLocation = '';
     this.latitude = 0;
     this.longitude = 0;
     this.results = null;
+    this.currentSelection = null;
   }
 
   getCurrentLocation = () => {
@@ -47,9 +49,13 @@ class WeatherApp extends Component {
   getLocation = (newLoc) => {
     geocoder.search({ q: newLoc })
       .then((response) => {
-        this.currentLocation = "You are viewing the weather for: " + response[0].display_name;
-        this.latitude = response[0].lat;
-        this.longitude = response[0].lon;
+        this.setState({
+          searchResults: response,
+        });
+        this.currentSelection = 0;
+        this.currentLocation = "You are viewing the weather for: " + this.state.searchResults[0].display_name;
+        this.latitude = this.state.searchResults[0].lat;
+        this.longitude = this.state.searchResults[0].lon;
         this.getWeatherInfo();
       })
       .catch((error) => {
@@ -57,8 +63,12 @@ class WeatherApp extends Component {
       })
   }
 
-  componentDidMount() {
-    this.getCurrentLocation();
+  locChange = (index, lat, lon, locName) => {
+    this.currentSelection = index;
+    this.currentLocation = "You are viewing the weather for: " + locName;
+    this.latitude = lat;
+    this.longitude = lon;
+    this.getWeatherInfo();
   }
 
   //----function to toggle between units----//
@@ -83,9 +93,8 @@ class WeatherApp extends Component {
       .then(response => (
         this.mapWeather(response.data)
       ));
+    console.log("got api info");
   }
-
-
 
   mapWeather = (data) => {
     let dailyData = data.daily.data;
@@ -106,6 +115,10 @@ class WeatherApp extends Component {
     });
   }
 
+  componentDidMount() {
+    this.getCurrentLocation();
+  }
+
   render() {
     console.log("I HAVE RENDERED!!!");
     return (
@@ -114,7 +127,11 @@ class WeatherApp extends Component {
         <button onClick={this.handleUnit}>Toggle Unit</button>
         <h2>{this.currentLocation}</h2>
         <LocationSearch changeLoc={this.getLocation} />
-        <CurrentWeatherCard currentForecast={this.state.currentForecast} />
+        <SearchResults 
+          currentSelection={this.currentSelection} 
+          searchResults={this.state.searchResults}
+          locChange={this.locChange}
+        />
         <CurrentWeatherPanel currentForecast={this.state.currentForecast} />
 
         <div>{this.results ? this.results : <div>Loading...</div>}</div>
