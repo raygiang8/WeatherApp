@@ -21,7 +21,8 @@ class WeatherApp extends Component {
       currentForecast: [],
       dailyForecast: [],
       unit: "si",
-      searchResults: null
+      searchResults: null,
+      backgroundImage: null
     };
 
     this.currentLocation = '';
@@ -92,7 +93,7 @@ class WeatherApp extends Component {
   }
 
   getWeatherInfo = () => {
-    var apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=${this.state.unit}&time=${Date.now()}`;
+    let apiURL = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API_KEY}/${this.latitude},${this.longitude}?units=${this.state.unit}&time=${Date.now()}`;
     axios.get(apiURL)
       .then(response => (
         this.mapWeather(response.data)
@@ -118,6 +119,24 @@ class WeatherApp extends Component {
 
     this.setState({
       dailyForecast: dailyData
+    });
+
+    let pexelsURL = `https://api.pexels.com/v1/search?query=${data.currently.summary}&per_page=30&page=1`;
+    let reqConfig = {
+      headers: {
+        authorization: process.env.REACT_APP_PEXELS_API_KEY
+      }
+    }
+    axios.get(pexelsURL, reqConfig)
+      .then(response => (
+        this.getRandomPhoto(response.data.photos)
+      ));
+  }
+
+  getRandomPhoto = (photos) => {
+    let randomIndex = Math.floor(Math.random() * (29 + 1));
+    this.setState({
+      backgroundImage: photos[randomIndex].src.original
     });
   }
 
@@ -148,7 +167,7 @@ class WeatherApp extends Component {
             </Row>
           </Col>
         </Row>
-
+        <img src={this.state.backgroundImage} width="500px" />
       </div>
     );
   }
