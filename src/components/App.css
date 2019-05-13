@@ -35,3 +35,339 @@
 .selected {
   background: lightgreen;
 }
+
+/*SPRITE ANIMATIONS*/
+svg{
+  border:3px solid #70757B;
+  background-color: #cccccc;
+  border-radius: 50%;
+  width:200px;
+  height: auto;
+  overflow: hidden;
+}
+
+#circle-sun{
+  background-color:#f4f2b0;
+  border:3px solid #cc5f0e;
+}
+
+.circle-night{
+  background-color:#3858a0;
+  border:3px solid #7b9ddb;
+}
+
+#circle-snow{
+  background-color: #e1ffff;
+  border:3px solid #6ea09f;
+}
+
+/*RAIN*/
+
+  #Tear1 {
+
+      animation: rain1 1.5s infinite;
+  }
+
+  #Tear2 {
+
+      animation: rain2 2.2s infinite;
+  }
+
+  #Tear3 {
+
+      animation: rain3 1s infinite;
+  }
+  #Tear4 {
+
+      animation: rain4 1.9s infinite;
+  }
+   #Cloud{
+     animation: wiggle 1s infinite;
+     transform-origin: center;
+
+   }
+
+  @keyframes rain1 {
+    5%{transform: translate(0, 0px);}
+    100%{transform: translate(0, 15px);}
+  }
+
+  @keyframes rain2 {
+    10%{transform: translate(0, 0px);}
+    100%{transform: translate(0, 16px);}
+  }
+  @keyframes rain3 {
+    100%{transform: translate(0, 14px);}
+  }
+  @keyframes rain4 {
+    20%{transform: translate(0, 0px);}
+    100%{transform: translate(0, 16.5px);}
+  }
+
+  @keyframes wiggle{
+    0% {transform: rotate(1deg);}
+   25% {transform: rotate(-1deg);}
+   50% {transform: rotate(1deg);}
+   75% {transform: rotate(-1deg);}
+   100% {transform: rotate(0deg);}
+  }
+
+/*SUN*/
+
+#YellowRays {
+  animation: yellow 2.5s infinite;
+  transform-origin: center;
+}
+
+@keyframes yellow {
+  0% {transform:scale(1.10);}
+  25% {transform:scale(1);}
+  50% {transform:scale(1.10);}
+  75% {transform:scale(0.90);}
+  100% {transform:scale(1);}
+}
+
+#OrangeRays {
+  animation: orange 2.5s infinite;
+  transform-origin: center;
+}
+
+@keyframes orange {
+  0% {transform:scale(0.90);}
+  25% {transform:scale(1.10);}
+  50% {transform:scale(1);}
+  75% {transform:scale(1.10);}
+  100% {transform:scale(0.90);}
+}
+
+/*NIGHT*/
+#zzz, #zzz_2{
+  animation: zzz 4.5s infinite;
+}
+
+@keyframes zzz{
+  100%{transform: translate(8px, -8px);}
+
+}
+
+#star1{
+  animation: star1 2.5s infinite;
+}
+
+#star2{
+  animation: star2 2.5s infinite;
+  transform-origin: center;
+
+}
+
+#star3{
+  animation: star3 2.5s ease-in infinite;
+}
+
+
+
+@keyframes star1{
+  0% {transform: rotate(2deg);}
+ 25% {transform: rotate(-1deg);}
+ 50% {transform: rotate(1deg);}
+ 75% {transform: rotate(-1deg);}
+ 100% {transform: rotate(0deg);}
+
+}
+
+@keyframes star2{
+50%{transform: rotate(10deg);}
+100%{transform: rotate(0deg);}
+}
+
+
+
+@keyframes star3{
+
+ 50% {transform: rotate(5deg);}
+ 100% {transform: rotate(0deg);}
+
+}
+
+#n-cloud1{
+animation: ncloud1 4.5s infinite;
+}
+
+#n-cloud2{
+  animation: ncloud2 4.5s infinite;
+}
+ @keyframes ncloud1{
+   100%{transform: translate(20px, 0);}
+ }
+
+ @keyframes ncloud2{
+   100%{transform: translate(20px, 0);}
+ }
+
+ /*Partly Cloudy*/
+ #cloudright{
+ animation: cloudright 3s ease infinite;
+ }
+
+ #cloudleft{
+   animation: cloudleft 3s ease infinite;
+ }
+
+ #Eyes_2{
+   animation: eyesc 3s infinite;
+   transform-origin: center;
+ }
+  @keyframes cloudright{
+    100%{transform: translate(-25px, 0);}
+  }
+
+  @keyframes cloudleft{
+    100%{transform: translate(25px, 0);}
+  }
+
+  @keyframes eyesc{
+    50%{transform: scale(0.8);}
+    100%{transform: scale(1);}
+  }
+
+  /*SNOW*/
+
+  #flake1_3_{
+    animation: flake1 3s ease infinite;
+  }
+  #flake2{
+    animation: flake2 3.5s ease infinite;
+  }
+
+  #flake3_2_{
+    animation: flake3 2.5s ease infinite;
+  }
+
+  #flake4_2_{
+    animation: flake4 4s ease infinite;
+  }
+
+  @keyframes flake1{
+    100%{transform: translate(0, 15px);}
+  }
+
+  @keyframes flake2{
+    20%{transform: translate(0, 0);}
+    100%{transform: translate(0, 15px);}
+  }
+
+  @keyframes flake3{
+    10%{transform: translate(0, 0);}
+    100%{transform: translate(0, 15px);}
+  }
+
+  @keyframes flake4{
+    40%{transform: translate(0, 0);}
+    100%{transform: translate(0, 15px);}
+  }
+
+  .scloud{
+    animation: wiggle 1s infinite;
+    transform-origin: center;
+
+  }
+
+  /*WIND*/
+
+  #wind3{
+    /* animation: wind3 2s infinite ease; */
+    animation: wind3move 3s infinite ease;
+    transform-origin: center;
+  }
+  #wind2{
+    /* animation: wind3 2s infinite ease; */
+    animation: wind2move 3s infinite ease;
+    transform-origin: center;
+  }
+  #wind1{
+    /* animation: wind3 2s infinite ease; */
+    animation: wind1move 3s infinite ease;
+    transform-origin: center;
+  }
+
+  #mouth{
+    animation: blow 3s infinite ease;
+    transform-origin: center;
+  }
+  /* @keyframes wind3{
+    100%{transform: scale(1.5);}
+  } */
+  @keyframes wind3move{
+      100%{transform: translate(5px, 0);}
+  }
+
+  @keyframes wind2move{
+      10%{transform: translate(0 0);}
+      100%{transform: translate(5px, 0);}
+  }
+
+  @keyframes wind1move{
+      25%{transform: translate(0 0);}
+      100%{transform: translate(5px, 0);}
+  }
+
+  @keyframes blow{
+    100%{transform: scale(0.8);}
+  }
+
+  /*SLEET*/
+
+  .flake{
+    animation: flakes 3s infinite ease;
+  }
+
+  @keyframes flakes{
+    100%{transform: translate(0px, 15px);}
+  }
+
+  #Sleets_2_{
+    animation: sleet 3s infinite ease;
+  }
+
+  @keyframes sleet{
+    5%{transform: translate(0, 0);}
+    100%{transform: translate(0px, 15px);}
+  }
+
+  #Cloud_3_{
+    animation: wiggle 2s infinite ease;
+    transform-origin: center;
+  }
+
+/*FOG*/
+
+#fog3{
+  animation: fog3 3.5s infinite ease;
+}
+
+#fog2{
+  animation: fog2 3.5s infinite ease;
+}
+
+#fog1{
+  animation: fog1 3.5s infinite ease;
+}
+
+#fmouth{
+  animation: fmouth 3.5s infinite ease;
+}
+
+@keyframes fog3{
+
+  100%{transform: translate(25px, 0px);}
+}
+
+@keyframes fog2{
+
+  100%{transform: translate(25px, 0px);}
+}
+
+@keyframes fog1{
+
+  100%{transform: translate(25px, 0px);}
+}
