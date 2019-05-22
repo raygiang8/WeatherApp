@@ -14,7 +14,9 @@ const CurrentWeatherCard = (props) => {
 
                 {/*<img src={'img/' + props.currentForecast.icon + ".svg"} width="150" alt={props.currentForecast.icon} />*/}
                 
-                <div className={props.currentForecast.icon} width="150"></div>
+                <div className={props.currentForecast.icon} style={{width: "150px", height: "150px"}}></div>
+{/*                <object data={'img/' + props.currentForecast.icon + ".svg"} type="image/svg+xml"
+                    style={{width: "150px", height: "150px"}}></object>*/}
 
                 <div>{Math.round(props.currentForecast.temperature)}&#8451;</div>
                 <div>{props.currentForecast.summary}</div>
