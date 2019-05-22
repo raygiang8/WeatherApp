@@ -35,3 +35,27 @@
 .selected {
   background: lightgreen;
 }
+
+.clear-day {
+  background: url("img/clear-day.svg") left center;
+}
+
+.clear-night {
+  background: url("img/clear-night.svg") left center;
+}
+
+.cloudy {
+  background: url("img/cloudy.svg") left center;
+}
+
+.fog {
+  background: url("img/fog.svg") left center;
+}
+
+.partly-cloudy-day {
+  background: url("img/partly-cloudy-day.svg") left center;
+}
+
+.partly-cloudy-night {
+  background: url("img/partly-cloudy-night.svg") left center;
+}

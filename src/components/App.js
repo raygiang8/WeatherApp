@@ -102,11 +102,10 @@ class WeatherApp extends Component {
 
   mapWeather = (data) => {
     let dailyData = data.daily;
-    let keyCounter = 0;
 
     let dailyForecast = dailyData.data.map((weather, index) =>
-      <Col xs={3}>
-        <DailyWeatherCard key={index} index={index} dailyForecast={dailyData} />
+      <Col xs={3} key={index} >
+        <DailyWeatherCard index={index} dailyForecast={dailyData} />
       </Col>
     );
 
@@ -135,9 +134,9 @@ class WeatherApp extends Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.getCurrentLocation();
-  }
+  };
 
   render() {
     console.log("I HAVE RENDERED!!!");
