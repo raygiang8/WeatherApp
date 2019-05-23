@@ -52,6 +52,31 @@ body {
     border-radius: 5px;
 }
 
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -63,6 +88,46 @@ body {
 
 .selected {
     background: lightgreen;
+}
+
+.clear-day {
+    background: url("img/clear-day.svg") left center;
+}
+
+.clear-night {
+    background: url("img/clear-night.svg") left center;
+}
+
+.cloudy {
+    background: url("img/cloudy.svg") left center;
+}
+
+.fog {
+    background: url("img/fog.svg") left center;
+}
+
+.partly-cloudy-day {
+    background: url("img/partly-cloudy-day.svg") left center;
+}
+
+.partly-cloudy-night {
+    background: url("img/partly-cloudy-night.svg") left center;
+}
+
+.rain {
+    background: url("img/rain.svg") left center;
+}
+
+.sleet {
+    background: url("img/sleet.svg") left center;
+}
+
+.snow {
+    background: url("img/snow.svg") left center;
+}
+
+.wind {
+    background: url("img/wind.svg") left center;
 }
 
 
