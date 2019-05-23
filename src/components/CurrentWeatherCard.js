@@ -8,10 +8,10 @@ const CurrentWeatherCard = (props) => {
   return (
     <fieldset>
       <legend>Current Weather</legend>
-      <div>Temperature: {props.currentForecast.temperature}&#8451;</div>
+      <div>Temperature: {props.currentForecast.temperature}{this.props.si ? "&#8451;" : "F"}</div>
       <div>Summary: {props.currentForecast.summary}</div>
       <div>UV Index: {props.currentForecast.uvIndex}</div>
-      <div>Probability of Precipitation: {props.currentForecast.precipProbability}</div>
+      <div>Chance of Precipiation: {props.currentForecast.precipProbability}</div>
     </fieldset>
   );
 }

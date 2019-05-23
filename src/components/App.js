@@ -20,6 +20,7 @@ class WeatherApp extends Component {
     this.state = {
       currentForecast: [],
       unit: "si",
+      si: true,
       searchResults: null,
       backgroundImage: null
     };
@@ -79,13 +80,15 @@ class WeatherApp extends Component {
   handleUnit = () => {
     if (this.state.unit === "si") {
       this.setState({
-        unit: "us"
+        unit: "us",
+        si: false,
       },
         () => this.getWeatherInfo());
     }
     else {
       this.setState({
-        unit: "si"
+        unit: "si",
+        si: true,
       },
         () => this.getWeatherInfo());
     }
@@ -102,11 +105,15 @@ class WeatherApp extends Component {
 
   mapWeather = (data) => {
     let dailyData = data.daily;
-    let keyCounter = 0;
-
     let dailyForecast = dailyData.data.map((weather, index) =>
       <Col xs={3}>
-        <DailyWeatherCard key={index} index={index} dailyForecast={dailyData} />
+        <DailyWeatherCard
+          key={index}
+          index={index}
+          dailyForecast={dailyData}
+          si={this.state.si}
+
+        />
       </Col>
     );
 
@@ -144,11 +151,28 @@ class WeatherApp extends Component {
     return (
       <div className="m-5">
         <Row>
-          <Col xs={3}>
-            <h1>Hell0 there.</h1>
-            <button onClick={this.handleUnit}>Toggle Unit</button>
-            <h2>{this.currentLocation}</h2>
-            <CurrentWeatherPanel currentForecast={this.state.currentForecast} />
+          <Col
+            xs={3}
+            style={{
+              backgroundImage: `url(${this.state.backgroundImage})`,
+              backgroundAttachment: 'fixed',
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className="currWeather__ColWrap">
+              <h1>Hey there!</h1>
+              <button onClick={this.handleUnit}>Toggle Unit</button>
+              <h5>{this.currentLocation}</h5>
+              {/* <img
+              src={this.state.backgroundImage}
+              width="500px"
+              className="currWeatherImg"
+            /> */}
+              <CurrentWeatherPanel
+                currentForecast={this.state.currentForecast}
+                si={this.state.si}
+              />
+            </div>
           </Col>
           <Col xs={9}>
             <LocationSearch changeLoc={this.getLocation} />
@@ -162,7 +186,6 @@ class WeatherApp extends Component {
             </Row>
           </Col>
         </Row>
-        <img src={this.state.backgroundImage} width="500px" />
       </div>
     );
   }

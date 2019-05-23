@@ -13,7 +13,7 @@ const CurrentWeatherCard = (props) => {
                 <div>{date.toDateString('en-US')}</div>
 
                 <img src={'img/' + props.currentForecast.icon + ".svg"} width="150" alt={props.currentForecast.icon} />
-                <div>{Math.round(props.currentForecast.temperature)}&#8451;</div>
+                <div><span className="currWeather__temp">{Math.round(props.currentForecast.temperature)}{props.si ? <span>&#8451;</span> : <span>&#8457;</span>}</span></div>
                 <div>{props.currentForecast.summary}</div>
                 <div>Probability of Precipitation: {props.currentForecast.precipProbability}%</div>
             </fieldset>
